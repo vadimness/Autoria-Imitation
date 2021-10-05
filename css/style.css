@@ -1,0 +1,19 @@
+.bg{
+    background-color: maroon;
+    border: 5px solid #fff;
+    color: #fff;
+    font-size: 60px;
+}
+.card-img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.card-details{
+    columns: 2;
+    list-style-type: none;
+    padding: 0;
+}
+.card-details i{
+    color: #e1786b;
+}
