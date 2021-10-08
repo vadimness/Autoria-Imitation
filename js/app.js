@@ -91,9 +91,9 @@ function createCardTemplate(cardData) {
             <li><i class="fas fa-map-marker-alt fa-fw me-3"></i>${cardData.country}</li>
             <li><i class="fas fa-gas-pump fa-fw me-3"></i>${cardData.fuel}, ${cardData.engine_volume}L</li>
             <li><i class="fas fa-cogs fa-fw me-3"></i>${cardData.transmission || '-'}</li>
-          //   <li><i class="fas fa-city"></i>${cardData.consume.city}</li>
-          //   <li><i class="fas fa-road"></i>${cardData.consume.road}</li>
-          //  <li><i class="fab fa-mix"></i>${cardData.consume.mixed || '-'}</li>
+            <li><i class="fas fa-road"></i>${cardData.consume.?road ?? '-'}</li>
+            <li><i class="fas fa-city"></i>${cardData.consume.?city ?? '-'}</li>
+            <li><i class="fas fa-infinity">${cardData.consume.?mixed  ?? '-'}</i></li>
           </ul>
           <p>Seller: ${cardData.seller} (<a href="tel:${cardData.phone}">${cardData.phone}</a>)</p>
           <ul class="list-group list-group-horizontal">
