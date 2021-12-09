@@ -1,10 +1,56 @@
-let CARS = JSON.parse(DATA);
+let DATA = [];
+let CARS = [];
 const showcaseEl = document.getElementById('showcase');
 const sortSelectEl = document.getElementById('sortSelect');
 const searchFormEl = document.getElementById('searchForm');
 const filterFormEl = document.getElementById('filterForm');
 const filterFields = ['make', 'fuel', 'transmission'];
+// {
+//     "id": "89aed5b8c686ebd713a62873e4cd756abab7a106",
+//     "make": "BMW",
+//     "model": "M3",
+//     "year": 2010,
+//     "img": "https://images.unsplash.com/photo-1523983302122-73e869e1f850?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+//     "color": "Goldenrod",
+//     "vin": "1G6DW677550624991",
+//     "country": "United States",
+//     "rating": 1.5,
+//     "price": 2000,
+//     "views": 5,
+//     "seller": "Ellery Girardin",
+//     "vin_check": true,
+//     "top": false,
+//     "timestamp": 1601652988000,
+//     "phone": "+1 (229) 999-8553",
+//     "fuel": "Benzin",
+//     "engine_volume": 1.4,
+//     "transmission": null,
+//     "mileage": 394036,
+//     "consume": {
+//       "city": 12.3,
+//       "mixed": 8.4
+//     }
+//   }
 
+getCars();
+
+async function getCars() {
+  try {
+    const response = await fetch('/data/cars1.json');
+    if (response.ok) {
+      const data = await response.json();
+      DATA = data;
+      CARS = data;
+      render(createCardsTemplates(CARS), showcaseEl);
+      render(createFilterForm(CARS), filterFormEl, 'afterbegin');
+    } else {
+      throw new Error(`Request fail! ${response.status}`);
+    }
+  } catch (error) {
+    console.error(error);
+    // alert('Sorry :( Error, try again later!')
+  }
+}
 
 render(createCardsTemplates(CARS), showcaseEl);
 render(createFilterForm(CARS), filterFormEl, 'afterbegin');
@@ -12,7 +58,7 @@ render(createFilterForm(CARS), filterFormEl, 'afterbegin');
 filterFormEl.addEventListener('submit', (e) => {
   e.preventDefault();
   const filterQuery = serializeFilterFormData(e.target);
-  CARS = filterCars(JSON.parse(DATA), filterQuery);
+  CARS = filterCars(DATA, filterQuery);
   render(createCardsTemplates(CARS), showcaseEl);
 });
 
@@ -27,7 +73,7 @@ sortSelectEl.addEventListener('change', (e) => {
 searchFormEl.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchQuery = serializeQueryString(e.target.search.value);
-  CARS = searchCars(JSON.parse(DATA), searchQuery);
+  CARS = searchCars(DATA, searchQuery);
   render(createCardsTemplates(CARS), showcaseEl);
 });
 
@@ -111,7 +157,13 @@ function render(htmlStr, elem, insert) {
 }
 
 function createCardsTemplates(cardsDataArray) {
- 
+  // const cardsTemplates = [];
+  // for (let i = 0; i < cardsDataArray.length; i++) {
+  //   const cardDataObject = cardsDataArray[i];
+  //   const cardTemplate = createCardTemplate(cardDataObject);
+  //   cardsTemplates.push(cardTemplate);
+  // }
+  // return cardsTemplates;
   return cardsDataArray.map((car) => createCardTemplate(car)).join('');
 }
 
@@ -170,5 +222,3 @@ function createCardTemplate(cardData) {
     </div>
   </div>`;
 }
-
-
