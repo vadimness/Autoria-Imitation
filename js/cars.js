@@ -19,12 +19,9 @@ const DATA = `
       "phone": "+1 (229) 999-8553",
       "fuel": "Benzin",
       "engine_volume": 1.4,
-      "transmission": null,
+      "transmission": "AT",
       "mileage": 394036,
-      "consume": {
-        "city": 12.3,
-        "mixed": 8.4
-      }
+      "consume": null
     },
     {
       "id": "9e952900c4a6fc66d35f00eac9785d97d3c77234",

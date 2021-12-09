@@ -1,154 +1,160 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-      crossorigin="anonymous"
-    />
-    <title>Autoria</title>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+    crossorigin="anonymous"
+  />
+  <title>Autoria</title>
+</head>
 
-  <body>
-    <div class="container">
-      <h1 class="text-center text-uppercase">Autoria</h1>
-      <div class="row">
-        <div class="col-12 border p-3 topbar">
-          <div class="row">
-            <div class="col-4">
-              <select class="form-select" id="sortSelect">
-                <option selected disabled>Sort type...</option>
-                <option value="price/-1">По цене (от дорогих)</option>
-                <option value="price/1">По цене (от дешёвых)</option>
-                <option value="rating/-1">По рейтингу (от популярных)</option>
-                <option value="rating/1">По рейтингу (от непопулярных)</option>
-                <option value="mileage/-1">По пробегу (от больш.)</option>
-                <option value="mileage/1">По пробегу (от меньш.)</option>
-                <option value="year/-1">По году производства (от больш.)</option>
-                <option value="year/1">По году производства (от меньш.)</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <form>
-                <div class="input-group">
-                  <input
-                    type="search"
-                    class="form-control"
-                    placeholder="Search cars"
-                    aria-label="Search cars"
-                    aria-describedby="searchBtn"
-                  />
-                  <button class="btn btn-outline-primary" id="searchBtn" type="submit">Search</button>
-                </div>
-              </form>
-            </div>
-            <div class="col-2">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary"><i class="fas fa-bars"></i></button>
-                <button type="button" class="btn btn-secondary"><i class="fas fa-th-large"></i></button>
+<body>
+  <div class="container">
+    <h1 class="text-center text-uppercase">Autoria</h1>
+    <ul id="users"></ul>
+    <div class="row">
+      <div class="col-12 border p-3 topbar">
+        <div class="row">
+          <div class="col-4">
+            <select class="form-select" id="sortSelect">
+              <option selected disabled>Sort type...</option>
+              <option value="price/-1">По цене (от дорогих)</option>
+              <option value="price/1">По цене (от дешёвых)</option>
+              <option value="rating/-1">По рейтингу (от популярных)</option>
+              <option value="rating/1">По рейтингу (от непопулярных)</option>
+              <option value="mileage/-1">По пробегу (от больш.)</option>
+              <option value="mileage/1">По пробегу (от меньш.)</option>
+              <option value="year/-1">По году производства (от больш.)</option>
+              <option value="year/1">По году производства (от меньш.)</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <form id="searchForm">
+              <div class="input-group">
+                <input
+                  type="search"
+                  class="form-control"
+                  name="search"
+                  placeholder="Search cars"
+                  aria-label="Search cars"
+                  aria-describedby="searchBtn"
+                />
+                <button class="btn btn-outline-primary" id="searchBtn" type="submit">Search</button>
               </div>
+            </form>
+          </div>
+          <div class="col-2">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-bars"></i></button>
+              <button type="button" class="btn btn-secondary"><i class="fas fa-th-large"></i></button>
             </div>
           </div>
         </div>
-        <div class="col-3 border p-3 filterbar"></div>
-        <div class="col-9 border p-3 showcase" id="showcase">
-          <!-- <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://placeimg.com/640/480/any" class="img-fluid rounded-start" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">BMW M3 1.4L (2010)</h5>
-                  <h4 class="card-price text-success fw-bolder">2000 $</h4>
-                  <ul class="card-details">
-                    <li><i class="fas fa-tachometer-alt fa-fw me-3"></i>300 000 km</li>
-                    <li><i class="fas fa-map-marker-alt fa-fw me-3"></i>Ukraine</li>
-                    <li><i class="fas fa-gas-pump fa-fw me-3"></i>Benzin, 1.4L</li>
-                    <li><i class="fas fa-cogs fa-fw me-3"></i>AT</li>
-                  </ul>
-                  <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item p-0 d-flex align-items-center">
-                      <i class="fas fa-check-circle px-1 text-success"></i>
-                    </li>
-                    <li class="list-group-item text-uppercase p-1">32hj5gjh23g5jh23g54hj2gh</li>
-                  </ul>
-                  <div class="d-flex justify-content-between text-muted mt-3">
-                    <span class="card-text"><small>13.05.2021, 20:45</small></span>
-                    <span><i class="fas fa-eye me-1"></i><span>45</span></span>
-                  </div>
+      </div>
+      <div class="col-3 border p-3 filterbar">
+        <form id="filterForm" class="filter-form">
+          
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-success">Filter</button>
+        </form>
+      </div>
+      <div class="col-9 border p-3 showcase" id="showcase">
+        <!-- <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="https://placeimg.com/640/480/any" class="img-fluid rounded-start" alt="..." />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">BMW M3 1.4L (2010)</h5>
+                <h4 class="card-price text-success fw-bolder">2000 $</h4>
+                <ul class="card-details">
+                  <li><i class="fas fa-tachometer-alt fa-fw me-3"></i>300 000 km</li>
+                  <li><i class="fas fa-map-marker-alt fa-fw me-3"></i>Ukraine</li>
+                  <li><i class="fas fa-gas-pump fa-fw me-3"></i>Benzin, 1.4L</li>
+                  <li><i class="fas fa-cogs fa-fw me-3"></i>AT</li>
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                  <li class="list-group-item p-0 d-flex align-items-center">
+                    <i class="fas fa-check-circle px-1 text-success"></i>
+                  </li>
+                  <li class="list-group-item text-uppercase p-1">32hj5gjh23g5jh23g54hj2gh</li>
+                </ul>
+                <div class="d-flex justify-content-between text-muted mt-3">
+                  <span class="card-text"><small>13.05.2021, 20:45</small></span>
+                  <span><i class="fas fa-eye me-1"></i><span>45</span></span>
                 </div>
               </div>
             </div>
-          </div> -->
-        </div>
+          </div>
+        </div> -->
       </div>
     </div>
+  </div>
 
-    <!-- <div class="container">
-            <div class="row">
-                <div class="col-1 bg">1</div>
-                <div class="col-1 bg">2</div>
-                <div class="col-1 bg">3</div>
-                <div class="col-1 bg">4</div>
-                <div class="col-1 bg">5</div>
-                <div class="col-1 bg">6</div>
-                <div class="col-1 bg">7</div>
-                <div class="col-1 bg">8</div>
-                <div class="col-1 bg">9</div>
-                <div class="col-1 bg">10</div>
-                <div class="col-1 bg">11</div>
-                <div class="col-1 bg">12</div>
-            </div>
-            <div class="row">
-                <div class="col-2 bg">1</div>
-                <div class="col-2 bg">2</div>
-                <div class="col-2 bg">3</div>
-                <div class="col-2 bg">4</div>
-                <div class="col-2 bg">5</div>
-                <div class="col-2 bg">6</div>
-            </div>
-            <div class="row">
-                <div class="col-3 bg">1</div>
-                <div class="col-3 bg">2</div>
-                <div class="col-3 bg">3</div>
-                <div class="col-3 bg">4</div>
-            </div>
-            <div class="row">
-                <div class="col-6 bg">1</div>
-                <div class="col-6 bg">2</div>
-            </div>
-            <div class="row">
-                <div class="col-12 bg">1</div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-xl-2 bg">999</div>
-                <div class="col-md-6 col-xl-2 bg">999</div>
-                <div class="col-md-6 col-xl-2 bg">999</div>
-                <div class="col-md-6 col-xl-2 bg">999</div>
-                <div class="col-md-6 col-xl-2 bg">999</div>
-                <div class="col-md-6 col-xl-4 bg">999</div>
-                <div class="col-md-6 col-xl-4 bg">999</div>
-                <div class="col-md-6 col-xl-2 bg">999</div>
-            </div>
-        </div> -->
+  <!-- <div class="container">
+          <div class="row">
+              <div class="col-1 bg">1</div>
+              <div class="col-1 bg">2</div>
+              <div class="col-1 bg">3</div>
+              <div class="col-1 bg">4</div>
+              <div class="col-1 bg">5</div>
+              <div class="col-1 bg">6</div>
+              <div class="col-1 bg">7</div>
+              <div class="col-1 bg">8</div>
+              <div class="col-1 bg">9</div>
+              <div class="col-1 bg">10</div>
+              <div class="col-1 bg">11</div>
+              <div class="col-1 bg">12</div>
+          </div>
+          <div class="row">
+              <div class="col-2 bg">1</div>
+              <div class="col-2 bg">2</div>
+              <div class="col-2 bg">3</div>
+              <div class="col-2 bg">4</div>
+              <div class="col-2 bg">5</div>
+              <div class="col-2 bg">6</div>
+          </div>
+          <div class="row">
+              <div class="col-3 bg">1</div>
+              <div class="col-3 bg">2</div>
+              <div class="col-3 bg">3</div>
+              <div class="col-3 bg">4</div>
+          </div>
+          <div class="row">
+              <div class="col-6 bg">1</div>
+              <div class="col-6 bg">2</div>
+          </div>
+          <div class="row">
+              <div class="col-12 bg">1</div>
+          </div>
+          <div class="row justify-content-center">
+              <div class="col-md-6 col-xl-2 bg">999</div>
+              <div class="col-md-6 col-xl-2 bg">999</div>
+              <div class="col-md-6 col-xl-2 bg">999</div>
+              <div class="col-md-6 col-xl-2 bg">999</div>
+              <div class="col-md-6 col-xl-2 bg">999</div>
+              <div class="col-md-6 col-xl-4 bg">999</div>
+              <div class="col-md-6 col-xl-4 bg">999</div>
+              <div class="col-md-6 col-xl-2 bg">999</div>
+          </div>
+      </div> -->
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./js/cars.js"></script>
-    <script src="./js/app.js"></script>
-  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"
+  ></script>
+  <!-- <script src="./js/cars.js"></script> -->
+  <script src="./js/app.js"></script>
+</body>
 </html>
