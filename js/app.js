@@ -36,7 +36,7 @@ getCars();
 
 async function getCars() {
   try {
-    const response = await fetch('/data/cars1.json');
+    const response = await fetch('/data/cars.json');
     if (response.ok) {
       const data = await response.json();
       DATA = data;
