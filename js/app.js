@@ -47,13 +47,13 @@ async function getCars() {
       throw new Error(`Request fail! ${response.status}`);
     }
   } catch (error) {
-    console.error(error);
+//     console.error(error);
     // alert('Sorry :( Error, try again later!')
   }
 }
 
-render(createCardsTemplates(CARS), showcaseEl);
-render(createFilterForm(CARS), filterFormEl, 'afterbegin');
+// render(createCardsTemplates(CARS), showcaseEl);
+// render(createFilterForm(CARS), filterFormEl, 'afterbegin');
 
 filterFormEl.addEventListener('submit', (e) => {
   e.preventDefault();
